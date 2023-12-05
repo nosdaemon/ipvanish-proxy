@@ -1,12 +1,12 @@
-FROM alpine:3.7
+FROM alpine:latest
 
 WORKDIR /app
 
 COPY root /
 
-RUN apk add --update --no-cache openvpn tinyproxy \
+RUN apk add --update --no-cache openvpn tinyproxy unzip wget\
 	&& mkdir config \
-	&& wget https://www.ipvanish.com/software/configs/configs.zip -P config/ \
+	&& wget https://configs.ipvanish.com/configs/configs.zip -P config/ \
 	&& unzip config/configs.zip -d config \
 	&& mv config/ca.ipvanish.com.crt . \
 	&& chmod 755 tls-verify.sh \
